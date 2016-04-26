@@ -1,0 +1,62 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@android:color/darker_gray">
+
+    <TextView
+        android:id="@+id/image_text_view"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:textSize="12sp"
+        android:text=""
+        android:background="@color/material_deep_teal_500" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/image_text_view"
+        android:background="@android:color/holo_red_light">
+
+        <TextView
+            android:id="@+id/peeble_beach_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:textSize="19sp"
+            android:text="Peeble Beach"
+            android:background="@android:color/holo_green_dark"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/california_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:textSize="17sp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:text="California"
+            android:background="@android:color/holo_orange_dark"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/miles_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_below="@+id/california_text_view"
+            android:textSize="15sp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:text="10 miles away"
+            android:background="@android:color/holo_purple"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</RelativeLayout>
