@@ -28,10 +28,9 @@
         android:id="@+id/quantity_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2"
+        android:text="0"
         android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"/>
+        android:textColor="@android:color/black"/>
 
     <Button
         android:layout_width="48dp"
