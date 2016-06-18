@@ -70,13 +70,14 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void createOrderSummary(int price, boolean whippedCream, boolean chocolate, String customerName) {
-        String summary = "Name: " + customerName +
-                "\nAdd whipped cream? " + whippedCream +
-                "\nAdd chocolate? " + chocolate +
-                "\nQuantity: " + quantity + "\n" +
-                "Total: $" + price + "\nThank you!";
+        String summary = getString(R.string.hint_name) + ": " + customerName +
+                "\n" + getString(R.string.add_whipped_cream) + whippedCream +
+                "\n" + getString(R.string.add_chocolate) + chocolate +
+                "\n" + getString(R.string.quantity)+ ": " + quantity +
+                "\n" + getString(R.string.total_pay)+ price +
+                "\n" + getString(R.string.thank_you);
 
-        composeEmail(summary);
+        composeEmail(customerName, summary);
     }
 
 //    private void displayMessage(String message) {
@@ -115,9 +116,10 @@ public class MainActivity extends ActionBarActivity {
         displayQuantity(quantity);
     }
 
-    public void composeEmail(String bodyText) {
+    public void composeEmail(String customerName, String bodyText) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(intent.EXTRA_SUBJECT, "Just Java order for: " + customerName);
         intent.putExtra(Intent.EXTRA_TEXT, bodyText);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);

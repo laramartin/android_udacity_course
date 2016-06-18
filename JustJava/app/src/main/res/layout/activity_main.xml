@@ -18,14 +18,14 @@
             android:id="@+id/customer_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="@string/hint_name"
             android:inputType="textCapWords"
             android:layout_marginBottom="24dp"  />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Toppings"
+            android:text="@string/toppings"
             android:textAllCaps="true"
             android:textSize="16sp"/>
 
@@ -33,7 +33,7 @@
             android:id="@+id/whipped_cream_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Whipped cream"
+            android:text="@string/whipped_cream"
             android:layout_marginTop="16dp"
             android:textSize="16sp"
             android:paddingLeft="24dp" />
@@ -42,7 +42,7 @@
             android:id="@+id/chocolate_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chocolate"
+            android:text="@string/chocolate"
             android:layout_marginTop="16dp"
             android:textSize="16sp"
             android:paddingLeft="24dp" />
@@ -50,7 +50,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="quantity"
+            android:text="@string/quantity"
             android:textSize="16sp"
             android:textAllCaps="true"
             android:layout_marginTop="16dp"/>
@@ -91,7 +91,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Summary"
+            android:text="@string/order_summary"
             android:textSize="16sp"
             android:textAllCaps="true"
             android:layout_marginTop="16dp"/>
@@ -106,9 +106,11 @@
             android:textColor="@android:color/black"/>
 
         <Button
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="order"
+            android:text="@string/order_button"
+            android:paddingLeft="50px"
+            android:paddingRight="50px"
             android:layout_marginTop="16dp"
             android:textSize="16sp"
             android:onClick="submitOrder"/>
