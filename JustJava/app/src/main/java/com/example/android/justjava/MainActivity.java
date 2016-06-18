@@ -14,8 +14,6 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.text.NumberFormat;
-
 /**
  * This app displays an order form to order coffee.
  */
@@ -51,7 +49,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private int calculatePrice(Boolean whippedCream, Boolean chocolate) {
-        //int cups = quantity * 5;
         int toppings = 0;
         if (whippedCream) {
             toppings += 1;
@@ -71,8 +68,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void createOrderSummary(int price, boolean whippedCream, boolean chocolate, String customerName) {
         String summary = getString(R.string.hint_name) + ": " + customerName +
-                "\n" + getString(R.string.add_whipped_cream) + whippedCream +
-                "\n" + getString(R.string.add_chocolate) + chocolate +
+                "\n" + getString(R.string.add_whipped_cream) + " " + whippedCream +
                 "\n" + getString(R.string.quantity)+ ": " + quantity +
                 "\n" + getString(R.string.total_pay)+ price +
                 "\n" + getString(R.string.thank_you);
@@ -80,27 +76,15 @@ public class MainActivity extends ActionBarActivity {
         composeEmail(customerName, summary);
     }
 
-//    private void displayMessage(String message) {
-//        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-//        orderSummaryTextView.setText(message);
-//    }
-
     private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
-//    /**
-//     * This method displays the given price on the screen.
-//     */
-//    private void displayPrice(int number) {
-//        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-//        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-//    }
 
     public void increment(View view) {
         if (quantity == 100) {
-            Toast.makeText(this, "You cannot have more than 100 coffees", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_more_100_coffees), Toast.LENGTH_SHORT).show();
             return;
         }
         quantity = quantity + 1;
@@ -109,7 +93,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void decrement(View view) {
         if (quantity == 1) {
-            Toast.makeText(this, "You cannot have less than 1 coffee", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_less_1_coffee), Toast.LENGTH_SHORT).show();
             return;
         }
         quantity = quantity - 1;
@@ -119,12 +103,12 @@ public class MainActivity extends ActionBarActivity {
     public void composeEmail(String customerName, String bodyText) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(intent.EXTRA_SUBJECT, "Just Java order for: " + customerName);
+        intent.putExtra(intent.EXTRA_SUBJECT, getString(R.string.just_java)+ ": " + customerName);
         intent.putExtra(Intent.EXTRA_TEXT, bodyText);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Toast.makeText(this, "There aren't email apps installed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_email_apps), Toast.LENGTH_SHORT).show();
         }
     }
 

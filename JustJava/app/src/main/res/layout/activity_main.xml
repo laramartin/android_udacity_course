@@ -23,11 +23,8 @@
             android:layout_marginBottom="24dp"  />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/toppings"
-            android:textAllCaps="true"
-            android:textSize="16sp"/>
+            style="@style/HeaderTextStyle"/>
 
         <CheckBox
             android:id="@+id/whipped_cream_checkbox"
@@ -48,12 +45,8 @@
             android:paddingLeft="24dp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/quantity"
-            android:textSize="16sp"
-            android:textAllCaps="true"
-            android:layout_marginTop="16dp"/>
+            style="@style/HeaderTextStyle"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -86,24 +79,6 @@
                 android:onClick="increment"/>
 
         </LinearLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/order_summary"
-            android:textSize="16sp"
-            android:textAllCaps="true"
-            android:layout_marginTop="16dp"/>
-
-        <TextView
-            android:id="@+id/order_summary_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="£10"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"/>
 
         <Button
             android:layout_width="wrap_content"
