@@ -14,6 +14,14 @@
         android:orientation="vertical"
         tools:context="com.example.android.justjava.MainActivity">
 
+        <EditText
+            android:id="@+id/customer_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="textCapWords"
+            android:layout_marginBottom="24dp"  />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +73,7 @@
                 android:id="@+id/quantity_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="1"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_marginRight="8dp"/>
