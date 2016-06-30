@@ -1,7 +1,6 @@
 package com.example.android.miwok;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Lara on 25/06/2016.
@@ -17,6 +15,7 @@ import java.util.List;
 public class WordAdapter extends ArrayAdapter<Word> {
 
     public WordAdapter(Activity context, ArrayList<Word> word){
+
         super(context, 0, word);
     }
 
@@ -29,7 +28,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
         // need to check if listItemView is null
         if(listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_words, parent, false);
+                    R.layout.list_item, parent, false);
         }
 
 
