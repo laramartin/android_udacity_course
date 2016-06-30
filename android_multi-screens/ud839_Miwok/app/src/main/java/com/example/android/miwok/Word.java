@@ -18,6 +18,7 @@ public class Word {
     }
 
     public String getMiwokTranslation(){
+
         return miwokTranslation;
     }
 
