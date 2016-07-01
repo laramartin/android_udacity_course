@@ -25,14 +25,12 @@ public class WordAdapter extends ArrayAdapter<Word> {
         Word currentWord = getItem(position);
         View listItemView = convertView;
 
-        // need to check if listItemView is null
         if(listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
         }
 
-
-        // if listItemView is not null
+        
         TextView defaultTranslationTextView = (TextView)
                 listItemView.findViewById(R.id.default_translation);
         defaultTranslationTextView.setText(currentWord.getDefaultTranslation());
