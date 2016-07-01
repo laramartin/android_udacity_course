@@ -2,32 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
+    android:layout_height="@dimen/list_item_height"
     android:orientation="horizontal">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/image_view"/>
+        android:id="@+id/image_view"
+        style="@style/WordImage"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginLeft="16dp">
+        style="@style/WordList">
+
 
         <TextView
             android:id="@+id/miwok_translation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="lutti" />
+            android:textStyle="bold"
+            tools:text="lutti"
+            style="@style/WordTranslations" />
 
         <TextView
             android:id="@+id/default_translation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="one" />
+            tools:text="one"
+            style="@style/WordTranslations" />
 
     </LinearLayout>
 
