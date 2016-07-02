@@ -11,28 +11,30 @@
     tools:context="eu.laramartin.kawaiimusicplayer.MainActivity">
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:text="Play"
         android:id="@+id/play"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="181dp"
+        android:layout_marginTop="176dp"
         android:background="@color/colorAccent"
+        android:src="@drawable/ic_play_arrow_black_24dp"
         android:onClick="playPlayer"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="95dp"
+        android:layout_marginStart="95dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pause"
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/pause"
-        android:layout_below="@+id/play"
-        android:layout_alignLeft="@+id/play"
-        android:layout_alignStart="@+id/play"
         android:background="@color/colorAccent"
-        android:layout_marginTop="16dp"
-        android:onClick="pausePlayer" />
+        android:src="@drawable/ic_pause_black_24dp"
+        android:onClick="pausePlayer"
+        android:layout_alignTop="@+id/play"
+        android:layout_centerHorizontal="true" />
 
+    
 </RelativeLayout>
