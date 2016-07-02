@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
+    float volume = 0.5f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,11 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
         final MediaPlayer song = MediaPlayer.create(this, R.raw.rolemusic_14_the_will);
 
-        Button playButton = (Button) this.findViewById(R.id.play);
-        Button pauseButton = (Button) this.findViewById(R.id.pause);
-        Button downButton = (Button) this.findViewById(R.id.pause);
-        Button upButton = (Button) this.findViewById(R.id.pause);
-
+        ImageButton playButton = (ImageButton) this.findViewById(R.id.play);
+        ImageButton pauseButton = (ImageButton) this.findViewById(R.id.pause);
+        ImageButton downButton = (ImageButton) this.findViewById(R.id.downVolume);
+        ImageButton upButton = (ImageButton) this.findViewById(R.id.upVolume);
 
         playButton.setOnClickListener(new View.OnClickListener() {
 
@@ -36,6 +37,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        downButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (volume > 0){
+                    volume = volume - 0.1f;
+                    song.setVolume(volume, volume);
+                }
+            }
+        });
+
+        upButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (volume < 1){
+                    volume = volume + 0.1f;
+                    song.setVolume(volume, volume);
+                }
+            }
+        });
     }
 }
 
