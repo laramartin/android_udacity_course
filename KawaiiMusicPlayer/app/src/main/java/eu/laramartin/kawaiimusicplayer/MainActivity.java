@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button playButton = (Button) this.findViewById(R.id.play);
         Button pauseButton = (Button) this.findViewById(R.id.pause);
+        Button downButton = (Button) this.findViewById(R.id.pause);
+        Button upButton = (Button) this.findViewById(R.id.pause);
+
 
         playButton.setOnClickListener(new View.OnClickListener() {
 

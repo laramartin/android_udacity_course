@@ -42,8 +42,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_volume_down_black_24dp"
-        android:id="@+id/imageButton2"
-        android:layout_alignTop="@+id/imageButton"
+        android:id="@+id/downVolume"
+        android:layout_alignTop="@+id/upVolume"
         android:layout_toRightOf="@+id/pause"
         android:layout_toEndOf="@+id/pause"
         android:layout_marginLeft="16dp"
@@ -54,11 +54,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_volume_up_black_24dp"
-        android:id="@+id/imageButton"
+        android:id="@+id/upVolume"
         android:layout_alignTop="@+id/pause"
-        android:layout_toRightOf="@+id/imageButton2"
-        android:layout_toEndOf="@+id/imageButton2"
+        android:layout_toRightOf="@+id/downVolume"
+        android:layout_toEndOf="@+id/downVolume"
         android:layout_marginLeft="16dp"
         android:background="@color/colorAccent"
-        android:onClick="upVolume"/>
+        android:onClick="upVolume" />
 </RelativeLayout>
