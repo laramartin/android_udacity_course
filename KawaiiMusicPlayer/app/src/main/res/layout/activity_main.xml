@@ -16,15 +16,15 @@
         android:layout_height="50dp"
         android:text="Play"
         android:id="@+id/play"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="174dp"
         android:background="@color/colorAccent"
         android:src="@drawable/ic_play_arrow_black_24dp"
         android:onClick="playPlayer"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="95dp"
-        android:layout_marginStart="95dp" />
+        android:layout_marginLeft="45dp"
+        android:layout_marginStart="45dp"/>
 
     <ImageButton
         android:layout_width="50dp"
@@ -34,7 +34,31 @@
         android:src="@drawable/ic_pause_black_24dp"
         android:onClick="pausePlayer"
         android:layout_alignTop="@+id/play"
-        android:layout_centerHorizontal="true" />
+        android:layout_toRightOf="@+id/play"
+        android:layout_toEndOf="@+id/play"
+        android:layout_marginLeft="16dp"/>
 
-    
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_volume_down_black_24dp"
+        android:id="@+id/imageButton2"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_toRightOf="@+id/pause"
+        android:layout_toEndOf="@+id/pause"
+        android:layout_marginLeft="16dp"
+        android:background="@color/colorAccent"
+        android:onClick="downVolume" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_volume_up_black_24dp"
+        android:id="@+id/imageButton"
+        android:layout_alignTop="@+id/pause"
+        android:layout_toRightOf="@+id/imageButton2"
+        android:layout_toEndOf="@+id/imageButton2"
+        android:layout_marginLeft="16dp"
+        android:background="@color/colorAccent"
+        android:onClick="upVolume"/>
 </RelativeLayout>
