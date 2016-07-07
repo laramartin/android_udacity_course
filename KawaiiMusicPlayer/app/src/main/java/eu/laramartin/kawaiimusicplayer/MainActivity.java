@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final MediaPlayer song = MediaPlayer.create(this, R.raw.rolemusic_14_the_will);
+        final MediaPlayer song = MediaPlayer.create(this, R.raw.button10);
 
         ImageButton playButton = (ImageButton) this.findViewById(R.id.play);
         ImageButton pauseButton = (ImageButton) this.findViewById(R.id.pause);
@@ -26,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 song.start();
+                song.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    public void onCompletion(MediaPlayer mp) {
+                        Toast.makeText(MainActivity.this, "the song has finished!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -54,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 }
 
