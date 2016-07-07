@@ -1,7 +1,6 @@
 package com.example.android.miwok;
 
 
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 /**
