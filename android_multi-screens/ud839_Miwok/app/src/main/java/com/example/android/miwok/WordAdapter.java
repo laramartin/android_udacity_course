@@ -2,7 +2,6 @@ package com.example.android.miwok;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
-import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,6 +27,8 @@ public class WordAdapter extends ArrayAdapter<Word> {
             releaseMediaPlayer();
         }
     };
+
+
 
     public WordAdapter(Activity context, ArrayList<Word> word, int color){
 
@@ -86,7 +86,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
     /**
      * Clean up the media player by releasing its resources.
      */
-    private void releaseMediaPlayer() {
+    public void releaseMediaPlayer() {
         // If the media player is not null, then it may be currently playing a sound.
         if (audio != null) {
             // Regardless of the current state of the media player, release its resources
@@ -99,6 +99,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
             audio = null;
         }
     }
+
 
 
 }

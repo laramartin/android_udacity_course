@@ -1,9 +1,12 @@
 package com.example.android.miwok;
 
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class ColorsActivity extends AppCompatActivity {
@@ -32,6 +35,12 @@ public class ColorsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(ColorsActivity.this, "ColorsActivity stopped", Toast.LENGTH_SHORT).show();
+
+    }
 
 
 }
