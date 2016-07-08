@@ -30,6 +30,7 @@
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
     <style name="WordList">
