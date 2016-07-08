@@ -25,8 +25,6 @@ public class ColorsActivity extends AppCompatActivity {
 
     private AudioManager audioManager;
 
-   //private int focusChange;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,9 +77,6 @@ public class ColorsActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
 
     private AudioManager.OnAudioFocusChangeListener afChangeListener =

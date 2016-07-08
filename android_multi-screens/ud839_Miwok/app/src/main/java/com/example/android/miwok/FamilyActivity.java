@@ -1,5 +1,7 @@
 package com.example.android.miwok;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,10 +23,14 @@ public class FamilyActivity extends AppCompatActivity {
         }
     };
 
+    private AudioManager audioManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
+
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         final ArrayList<Word> words = new ArrayList<Word>();
 
@@ -56,19 +62,64 @@ public class FamilyActivity extends AppCompatActivity {
                 // Get the {@link Word} object at the given position the user clicked on
                 Word word = words.get(position);
 
-                // Create and setup the {@link MediaPlayer} for the audio resource associated
-                // with the current word
-                audio = MediaPlayer.create(FamilyActivity.this, word.getAudioFile());
+                int focusChange = audioManager.requestAudioFocus(afChangeListener,
+                        AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
-                // Start the audio file
-                audio.start();
+                if (focusChange == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    // Create and setup the {@link MediaPlayer} for the audio resource associated
+                    // with the current word
+                    audio = MediaPlayer.create(FamilyActivity.this, word.getAudioFile());
 
-                // Setup a listener on the media player, so that we can stop and release the
-                // media player once the sound has finished playing.
-                audio.setOnCompletionListener(completionListener);
+                    // Start the audio file
+                    audio.start();
+
+                    // Setup a listener on the media player, so that we can stop and release the
+                    // media player once the sound has finished playing.
+                    audio.setOnCompletionListener(completionListener);
+                }
             }
         });
     }
+
+    private AudioManager.OnAudioFocusChangeListener afChangeListener =
+            new AudioManager.OnAudioFocusChangeListener() {
+                public void onAudioFocusChange(int focusChange) {
+                    if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
+                        // Pause playback because your Audio Focus was
+                        // temporarily stolen, but will be back soon.
+                        // i.e. for a phone call
+                        Toast.makeText(FamilyActivity.this, "AUDIOFOCUS_LOSS_TRANSIENT", Toast.LENGTH_SHORT).show();
+                        audio.pause();
+                        audio.seekTo(0);
+                    } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                        // Stop playback, because you lost the Audio Focus.
+                        // i.e. the user started some other playback app
+                        // Remember to unregister your controls/buttons here.
+                        // And release the kra — Audio Focus!
+                        // You’re done.
+                        Toast.makeText(FamilyActivity.this, "AUDIOFOCUS_LOSS", Toast.LENGTH_SHORT).show();
+                        releaseMediaPlayer();
+                    } else if (focusChange ==
+                            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                        // Lower the volume, because something else is also
+                        // playing audio over you.
+                        // i.e. for notifications or navigation directions
+                        Toast.makeText(FamilyActivity.this, "AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK", Toast.LENGTH_SHORT).show();
+                        audio.setVolume(0.5f, 0.5f);
+                        audio.pause();
+                    } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                        // Resume playback, because you hold the Audio Focus
+                        // again!
+                        // i.e. the phone call ended or the nav directions
+                        // are finished
+                        Toast.makeText(FamilyActivity.this, "AUDIOFOCUS_GAIN", Toast.LENGTH_SHORT).show();
+                        audio.setVolume(1.0f, 1.0f);
+                        audio.start();
+                    }
+                }
+            };
+
+
 
     /**
      * Clean up the media player by releasing its resources.
@@ -84,6 +135,7 @@ public class FamilyActivity extends AppCompatActivity {
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             audio = null;
+            audioManager.abandonAudioFocus(afChangeListener);
         }
     }
 
