@@ -82,7 +82,8 @@ public class ColorsActivity extends AppCompatActivity {
     private AudioManager.OnAudioFocusChangeListener audioFocusChangeListener =
             new AudioManager.OnAudioFocusChangeListener() {
                 public void onAudioFocusChange(int focusChange) {
-                    if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
+                    if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange ==
+                            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
                         // Pause playback because your Audio Focus was
                         // temporarily stolen, but will be back soon.
                         // i.e. for a phone call
@@ -97,14 +98,6 @@ public class ColorsActivity extends AppCompatActivity {
                         // You’re done.
                         Toast.makeText(ColorsActivity.this, "AUDIOFOCUS_LOSS", Toast.LENGTH_SHORT).show();
                         releaseMediaPlayer();
-                    } else if (focusChange ==
-                            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-                        // Lower the volume, because something else is also
-                        // playing audio over you.
-                        // i.e. for notifications or navigation directions
-                        Toast.makeText(ColorsActivity.this, "AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK", Toast.LENGTH_SHORT).show();
-                        audio.setVolume(0.5f, 0.5f);
-                        audio.pause();
                     } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                         // Resume playback, because you hold the Audio Focus
                         // again!
@@ -138,7 +131,6 @@ public class ColorsActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Toast.makeText(ColorsActivity.this, "ColorsActivity stopped", Toast.LENGTH_SHORT).show();
         releaseMediaPlayer();
     }
 }
