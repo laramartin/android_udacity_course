@@ -25,14 +25,41 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NumbersActivity" android:label="Numbers"/>
-        <activity android:name=".PhrasesActivity" android:label="Phrases"/>
-        <activity android:name=".FamilyActivity" android:label="Family Members"/>
-        <activity android:name=".ColorsActivity" android:label="Colors"/>
+        <activity
+            android:name=".NumbersActivity"
+            android:label="Numbers"
+            android:parentActivityName="MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.miwok.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PhrasesActivity"
+            android:label="Phrases"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.miwok.MainActivity" />
+        </activity>
+        <activity
+            android:name=".FamilyActivity"
+            android:label="Family Members"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.miwok.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ColorsActivity"
+            android:label="Colors"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.miwok.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
