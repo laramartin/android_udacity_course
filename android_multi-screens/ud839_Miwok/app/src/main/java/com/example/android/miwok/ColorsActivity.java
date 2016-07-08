@@ -60,7 +60,7 @@ public class ColorsActivity extends AppCompatActivity {
                 // Get the {@link Word} object at the given position the user clicked on
                 Word word = words.get(position);
 
-                int focusChange = audioManager.requestAudioFocus(afChangeListener,
+                int focusChange = audioManager.requestAudioFocus(audioFocusChangeListener,
                         AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
                 if (focusChange == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
@@ -79,7 +79,7 @@ public class ColorsActivity extends AppCompatActivity {
         });
     }
 
-    private AudioManager.OnAudioFocusChangeListener afChangeListener =
+    private AudioManager.OnAudioFocusChangeListener audioFocusChangeListener =
             new AudioManager.OnAudioFocusChangeListener() {
                 public void onAudioFocusChange(int focusChange) {
                     if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
@@ -131,7 +131,7 @@ public class ColorsActivity extends AppCompatActivity {
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             audio = null;
-            audioManager.abandonAudioFocus(afChangeListener);
+            audioManager.abandonAudioFocus(audioFocusChangeListener);
         }
     }
 
