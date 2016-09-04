@@ -5,17 +5,17 @@ package com.example.android.quakereport;
  */
 public class Earthquake {
 
-    float magnitude;
-    String city;
+    double magnitude;
+    String location;
     String date;
 
-    public Earthquake(float magnitude, String city, String date) {
+    public Earthquake(double magnitude, String location, String date) {
         this.magnitude = magnitude;
-        this.city = city;
+        this.location = location;
         this.date = date;
     }
 
-    public float getMagnitude() {
+    public double getMagnitude() {
         return magnitude;
     }
 
@@ -23,12 +23,12 @@ public class Earthquake {
         this.magnitude = magnitude;
     }
 
-    public String getCity() {
-        return city;
+    public String getLocation() {
+        return location;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getDate() {
@@ -39,6 +39,6 @@ public class Earthquake {
         this.date = date;
     }
 
-    
+
 
 }
