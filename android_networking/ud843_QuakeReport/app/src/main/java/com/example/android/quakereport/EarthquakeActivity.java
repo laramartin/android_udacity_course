@@ -31,7 +31,9 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Create a fake list of earthquake locations.
-        ArrayList<Earthquake> earthquakes = new ArrayList<>();
+        ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
+
+       // ArrayList<Earthquake> earthquakes = new ArrayList<>();
 
 //        earthquakes.add(new Earthquake(7.2, "San Francisco", "Feb 2, 2016"));
 //        earthquakes.add(new Earthquake(5.1, "London", "July 20, 2015"));
@@ -41,16 +43,16 @@ public class EarthquakeActivity extends AppCompatActivity {
 //        earthquakes.add(new Earthquake(4.9, "Rio de Janeiro", "Aug 19, 2012"));
 //        earthquakes.add(new Earthquake(1.6, "Paris", "Oct 30, 2011"));
 
-        earthquakes.add(new Earthquake(7.2, "Yelizovo, Russia","Jan 30, 2016"));
-        earthquakes.add(new Earthquake(6.1, "Taron, Papua New Guinea", "Jan 26, 2016"));
-        earthquakes.add(new Earthquake(6.3, "Al Hoceima, Morocco", "Jan 25, 2016"));
-        earthquakes.add(new Earthquake(7.1, "Old Iliamna, Alaska", "Jan 24, 2016"));
-        earthquakes.add(new Earthquake(6.6, "Tomatlan, Mexico", "Jan 21, 2016"));
-        earthquakes.add(new Earthquake(6.7, "Shizunai, Japan", "Jan 14, 2016"));
-        earthquakes.add(new Earthquake(6.1, "Charagua, Bolivia", "Jan 14, 2016"));
-        earthquakes.add(new Earthquake(6.2, "Rumoi, Japan", "Jan 11, 2016"));
-        earthquakes.add(new Earthquake(6.5, "Sarangani, Philippines", "Jan 11, 2016"));
-        earthquakes.add(new Earthquake(6.0, "Pacific-Antarctic Ridge", "Jan 05, 2016"));
+//        earthquakes.add(new Earthquake("7.2", "Yelizovo, Russia","Jan 30, 2016"));
+//        earthquakes.add(new Earthquake("6.1", "Taron, Papua New Guinea", "Jan 26, 2016"));
+//        earthquakes.add(new Earthquake("6.3", "Al Hoceima, Morocco", "Jan 25, 2016"));
+//        earthquakes.add(new Earthquake("7.1", "Old Iliamna, Alaska", "Jan 24, 2016"));
+//        earthquakes.add(new Earthquake("6.6", "Tomatlan, Mexico", "Jan 21, 2016"));
+//        earthquakes.add(new Earthquake("6.7", "Shizunai, Japan", "Jan 14, 2016"));
+//        earthquakes.add(new Earthquake("6.1", "Charagua, Bolivia", "Jan 14, 2016"));
+//        earthquakes.add(new Earthquake("6.2", "Rumoi, Japan", "Jan 11, 2016"));
+//        earthquakes.add(new Earthquake("6.5", "Sarangani, Philippines", "Jan 11, 2016"));
+//        earthquakes.add(new Earthquake("6.0", "Pacific-Antarctic Ridge", "Jan 05, 2016"));
 
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
