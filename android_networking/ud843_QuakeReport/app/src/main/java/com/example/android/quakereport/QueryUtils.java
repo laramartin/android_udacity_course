@@ -67,8 +67,11 @@ public final class QueryUtils {
                 SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
                 String formattedTime = dateFormatter.format(dateObject);
 
+                Log.e("QueryUtils", place);
+
                 Earthquake earthquake = new Earthquake(magnitude, place, formattedTime);
                 earthquakes.add(earthquake);
+
             }
 
 
