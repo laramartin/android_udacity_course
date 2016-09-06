@@ -1,12 +1,15 @@
 package com.example.android.quakereport;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,16 +33,31 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
 
 
         }
+
         TextView magnitudeTextView = (TextView)
                 listItemView.findViewById(R.id.magnitudeTextView);
         TextView locationTextView = (TextView)
                 listItemView.findViewById(R.id.locationTextView);
-        TextView dateTextView = (TextView)
+        TextView dayOfDateTextView = (TextView)
                 listItemView.findViewById(R.id.dayOfDateTextView);
+        TextView hoursOfDateTextView = (TextView)
+                listItemView.findViewById(R.id.hoursOfDateTextView);
+
+
+
+        Date dateObject = new Date(currentEarthquake.getDate());
+        SimpleDateFormat dayOfDateFormatter = new SimpleDateFormat("MMM DD, yyyy");
+        SimpleDateFormat hoursOfDateFormatter = new SimpleDateFormat("h:mm a");
+        String formattedDay = dayOfDateFormatter.format(dateObject);
+        String formattedHours = hoursOfDateFormatter.format(dateObject);
 
         magnitudeTextView.setText(currentEarthquake.getMagnitude());
         locationTextView.setText(currentEarthquake.getLocation());
-        dateTextView.setText(currentEarthquake.getDate());
+        dayOfDateTextView.setText(formattedDay);
+        hoursOfDateTextView.setText(formattedHours);
+
+        Log.v("adapter", formattedDay);
+        Log.v("adapter", formattedHours);
 
         return listItemView;
     }

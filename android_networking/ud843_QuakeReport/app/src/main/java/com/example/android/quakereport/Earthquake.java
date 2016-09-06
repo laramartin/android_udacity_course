@@ -7,9 +7,9 @@ public class Earthquake {
 
     String magnitude;
     String location;
-    String date;
+    Long date;
 
-    public Earthquake(String magnitude, String location, String date) {
+    public Earthquake(String magnitude, String location, Long date) {
         this.magnitude = magnitude;
         this.location = location;
         this.date = date;
@@ -31,11 +31,11 @@ public class Earthquake {
         this.location = location;
     }
 
-    public String getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 
