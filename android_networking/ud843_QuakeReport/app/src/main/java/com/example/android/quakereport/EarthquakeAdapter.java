@@ -1,7 +1,6 @@
 package com.example.android.quakereport;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +29,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
         if(listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.earthquake_list_item, parent, false);
-
-
         }
 
         TextView magnitudeTextView = (TextView)
@@ -53,7 +50,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
         String formattedHours = hoursOfDateFormatter.format(dateObject);
 
         magnitudeTextView.setText(currentEarthquake.getMagnitude());
-//        locationTextView.setText(currentEarthquake.getLocation());
         dayOfDateTextView.setText(formattedDay);
         hoursOfDateTextView.setText(formattedHours);
 
@@ -63,22 +59,16 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
         String pattern = " of ";
 
         if (originalLocation.contains(pattern)) {
-            Log.v("adapter", originalLocation);
-            Log.v("adapter", originalLocation.split(" of ")[1]);
             String[] splitLocation = originalLocation.split(" of ");
             locationOffset = splitLocation[0].concat(pattern);
             primaryLocation = splitLocation[1];
         } else {
-            Log.v("adapter", "NOOO".concat(originalLocation));
             locationOffset = getContext().getString(R.string.near_the);
             primaryLocation = originalLocation;
         }
 
         locationOffsetTextView.setText(locationOffset);
         primaryLocationTextView.setText(primaryLocation);
-        
-        Log.v("adapter", formattedDay);
-        Log.v("adapter", formattedHours);
 
         return listItemView;
     }
