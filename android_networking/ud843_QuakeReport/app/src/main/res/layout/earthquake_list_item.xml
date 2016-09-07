@@ -11,12 +11,25 @@
         android:layout_weight="1"
         style="@style/magnitude"/>
 
-    <TextView
-        android:id="@+id/locationTextView"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        style="@style/location"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/locationOffsetTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/location"/>
+
+        <TextView
+            android:id="@+id/primaryLocationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/location"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"

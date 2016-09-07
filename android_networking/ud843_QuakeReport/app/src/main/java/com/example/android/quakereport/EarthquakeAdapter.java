@@ -36,13 +36,14 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
 
         TextView magnitudeTextView = (TextView)
                 listItemView.findViewById(R.id.magnitudeTextView);
-        TextView locationTextView = (TextView)
-                listItemView.findViewById(R.id.locationTextView);
+        TextView locationOffsetTextView = (TextView)
+                listItemView.findViewById(R.id.locationOffsetTextView);
+        TextView primaryLocationTextView = (TextView)
+                listItemView.findViewById(R.id.primaryLocationTextView);
         TextView dayOfDateTextView = (TextView)
                 listItemView.findViewById(R.id.dayOfDateTextView);
         TextView hoursOfDateTextView = (TextView)
                 listItemView.findViewById(R.id.hoursOfDateTextView);
-
 
 
         Date dateObject = new Date(currentEarthquake.getDate());
@@ -52,10 +53,30 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
         String formattedHours = hoursOfDateFormatter.format(dateObject);
 
         magnitudeTextView.setText(currentEarthquake.getMagnitude());
-        locationTextView.setText(currentEarthquake.getLocation());
+//        locationTextView.setText(currentEarthquake.getLocation());
         dayOfDateTextView.setText(formattedDay);
         hoursOfDateTextView.setText(formattedHours);
 
+        String originalLocation = currentEarthquake.getLocation();
+        String primaryLocation;
+        String locationOffset;
+        String pattern = " of ";
+
+        if (originalLocation.contains(pattern)) {
+            Log.v("adapter", originalLocation);
+            Log.v("adapter", originalLocation.split(" of ")[1]);
+            String[] splitLocation = originalLocation.split(" of ");
+            locationOffset = splitLocation[0].concat(pattern);
+            primaryLocation = splitLocation[1];
+        } else {
+            Log.v("adapter", "NOOO".concat(originalLocation));
+            locationOffset = getContext().getString(R.string.near_the);
+            primaryLocation = originalLocation;
+        }
+
+        locationOffsetTextView.setText(locationOffset);
+        primaryLocationTextView.setText(primaryLocation);
+        
         Log.v("adapter", formattedDay);
         Log.v("adapter", formattedHours);
 
