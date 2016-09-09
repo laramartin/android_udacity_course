@@ -39,6 +39,4 @@ public class Earthquake {
         this.date = date;
     }
 
-
-
 }

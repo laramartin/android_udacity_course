@@ -6,16 +6,16 @@
 
     <TextView
         android:id="@+id/magnitudeTextView"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/magnitude_circle"
         style="@style/magnitude"/>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="2">
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/locationOffsetTextView"
@@ -34,7 +34,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
