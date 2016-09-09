@@ -24,24 +24,32 @@
 
     <style name="magnitude">
         <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textSize">16sp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="location">
-        <item name="android:textSize">16sp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:paddingLeft">8dp</item>
+    <style name="offsetLocation">
+        <item name="android:textSize">12sp</item>
         <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/textColorEarthquakeDetails</item>
+    </style>
+
+    <style name="primaryLocation">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
     </style>
 
     <style name="date">
-        <item name="android:textSize">16sp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_gravity">end</item>
+        <item name="android:textColor">@color/textColorEarthquakeDetails</item>
     </style>
 
 </resources>
