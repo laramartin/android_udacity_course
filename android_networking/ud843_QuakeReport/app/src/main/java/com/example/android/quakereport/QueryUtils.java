@@ -59,8 +59,9 @@ public final class QueryUtils {
                 double magnitude = properties.getDouble("mag");
                 String place = properties.getString("place");
                 Long timeInMilliseconds = properties.getLong("time");
+                String url = properties.getString("url");
 
-                Earthquake earthquake = new Earthquake(magnitude, place, timeInMilliseconds);
+                Earthquake earthquake = new Earthquake(magnitude, place, timeInMilliseconds, url);
                 earthquakes.add(earthquake);
 
             }

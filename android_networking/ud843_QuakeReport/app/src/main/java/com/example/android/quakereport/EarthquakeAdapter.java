@@ -125,6 +125,15 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
         // Set the color on the magnitude circle
         magnitudeCircle.setColor(magnitudeColor);
 
+//        listItemView.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+////                Intent intent = getEarthquakeUrlIntent(currentEarthquake);
+////                EarthquakeActivity.this.startActivity(intent);
+//                Toast.makeText(EarthquakeAdapter.this, "URL", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
         return listItemView;
     }
 
