@@ -62,17 +62,21 @@ public class MainActivity extends AppCompatActivity {
     private class EarthquakeAsyncTask extends AsyncTask<String, Void, Event> {
 
         @Override
-        protected Event doInBackground(String... strings) {
-            Event currentEarthquake = Utils.fetchEarthquakeData(USGS_REQUEST_URL);
+        protected Event doInBackground(String... urls) {
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+
+            Event currentEarthquake = Utils.fetchEarthquakeData(urls[0]);
 
             return currentEarthquake;
         }
 
-        protected void onPostExecute(Event currentEarthquake) {
-                if (currentEarthquake == null) {
+        protected void onPostExecute(Event result) {
+                if (result == null) {
                     return;
                 }
-                updateUi(currentEarthquake);
+                updateUi(result);
             ;
         }
     }
