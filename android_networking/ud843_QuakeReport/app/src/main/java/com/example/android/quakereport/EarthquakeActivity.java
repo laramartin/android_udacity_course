@@ -25,7 +25,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity
@@ -35,20 +34,13 @@ public class EarthquakeActivity extends AppCompatActivity
 
     ListView earthquakeListView;
     EarthquakeAdapter earthquakeAdapter;
-    ArrayList<Earthquake> earthquakes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-//        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-//        task.execute(SAMPLE_URL);
-
         earthquakeListView = (ListView) findViewById(R.id.list);
-//        earthquakeAdapter = new EarthquakeAdapter(this, -1, earthquakes);
-
-//        earthquakeListView.setAdapter(earthquakeAdapter);
 
         earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,28 +69,6 @@ public class EarthquakeActivity extends AppCompatActivity
     public void onLoaderReset(Loader<List<Earthquake>> loader) {
 
     }
-
-//    public class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
-//
-//        @Override
-//        protected List<Earthquake> doInBackground(String... stringUrl) {
-//            URL url = QueryUtils.createUrl(stringUrl[0]);
-//            List<Earthquake> earthquakes = new ArrayList<>();
-//            try {
-//                    String jsonResponse = QueryUtils.makeHttpRequest(url);
-//                earthquakes = QueryUtils.extractEarthquakes(jsonResponse);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            return earthquakes;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(List<Earthquake> earthquakes) {
-//            updateUi(earthquakes);
-//        }
-//    }
 
     private void updateUi(List<Earthquake> earthquakes) {
         earthquakeAdapter = new EarthquakeAdapter(this, -1, earthquakes);

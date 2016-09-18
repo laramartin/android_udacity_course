@@ -130,8 +130,6 @@ public final class QueryUtils {
                 earthquakes.add(earthquake);
 
             }
-
-
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
@@ -142,22 +140,4 @@ public final class QueryUtils {
         // Return the list of earthquakes
         return earthquakes;
     }
-
-//    public class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
-//
-//        @Override
-//        protected List<Earthquake> doInBackground(String... stringUrl) {
-//            URL url = createUrl(stringUrl[0]);
-//            List<Earthquake> earthquakes = new ArrayList<>();
-//            try {
-//                String jsonResponse = makeHttpRequest(url);
-//                earthquakes = extractEarthquakes(jsonResponse);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            return earthquakes;
-//        }
-//    }
-
 }
