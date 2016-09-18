@@ -68,7 +68,7 @@ public class EarthquakeActivity extends AppCompatActivity {
             URL url = QueryUtils.createUrl(stringUrl[0]);
             List<Earthquake> earthquakes = new ArrayList<>();
             try {
-                String jsonResponse = QueryUtils.makeHttpRequest(url);
+                    String jsonResponse = QueryUtils.makeHttpRequest(url);
                 earthquakes = QueryUtils.extractEarthquakes(jsonResponse);
             } catch (IOException e) {
                 e.printStackTrace();
