@@ -15,7 +15,10 @@
  */
 package com.example.android.quakereport;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -60,7 +63,17 @@ public class EarthquakeActivity extends AppCompatActivity
         emptyStateTextView = (TextView) findViewById(R.id.emptyState);
         earthquakeListView.setEmptyView(emptyStateTextView);
 
-        getSupportLoaderManager().initLoader(0, null, this);
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            getSupportLoaderManager().initLoader(0, null, this);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            emptyStateTextView.setText(R.string.no_internet);
+        }
+
+
     }
 
     @Override

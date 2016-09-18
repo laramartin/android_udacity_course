@@ -109,7 +109,7 @@ public final class QueryUtils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
 
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
