@@ -104,6 +104,13 @@ public final class QueryUtils {
 
     public static ArrayList<Earthquake> extractEarthquakes(String response) {
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
 
