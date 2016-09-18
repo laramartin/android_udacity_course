@@ -17,19 +17,19 @@ package com.example.android.quakereport;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EarthquakeActivity extends AppCompatActivity {
+public class EarthquakeActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<List<Earthquake>> {
 
     public static final String SAMPLE_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10";
 
@@ -42,8 +42,8 @@ public class EarthquakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-        task.execute(SAMPLE_URL);
+//        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
+//        task.execute(SAMPLE_URL);
 
         earthquakeListView = (ListView) findViewById(R.id.list);
 //        earthquakeAdapter = new EarthquakeAdapter(this, -1, earthquakes);
@@ -59,29 +59,46 @@ public class EarthquakeActivity extends AppCompatActivity {
                 EarthquakeActivity.this.startActivity(intent);
             }
         });
+
+        getSupportLoaderManager().initLoader(0, null, this);
     }
 
-    public class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
-
-        @Override
-        protected List<Earthquake> doInBackground(String... stringUrl) {
-            URL url = QueryUtils.createUrl(stringUrl[0]);
-            List<Earthquake> earthquakes = new ArrayList<>();
-            try {
-                    String jsonResponse = QueryUtils.makeHttpRequest(url);
-                earthquakes = QueryUtils.extractEarthquakes(jsonResponse);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return earthquakes;
-        }
-
-        @Override
-        protected void onPostExecute(List<Earthquake> earthquakes) {
-            updateUi(earthquakes);
-        }
+    @Override
+    public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
+        return new EarthquakeLoader(EarthquakeActivity.this, SAMPLE_URL);
     }
+
+    @Override
+    public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> data) {
+        updateUi(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Earthquake>> loader) {
+
+    }
+
+//    public class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
+//
+//        @Override
+//        protected List<Earthquake> doInBackground(String... stringUrl) {
+//            URL url = QueryUtils.createUrl(stringUrl[0]);
+//            List<Earthquake> earthquakes = new ArrayList<>();
+//            try {
+//                    String jsonResponse = QueryUtils.makeHttpRequest(url);
+//                earthquakes = QueryUtils.extractEarthquakes(jsonResponse);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return earthquakes;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<Earthquake> earthquakes) {
+//            updateUi(earthquakes);
+//        }
+//    }
 
     private void updateUi(List<Earthquake> earthquakes) {
         earthquakeAdapter = new EarthquakeAdapter(this, -1, earthquakes);
