@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class PetDbHelper extends SQLiteOpenHelper {
 
-    private final static String DB_NAME = "shelter";
+    private final static String DB_NAME = "shelter.db";
     private final static int DB_VERSION = 1;
 
 
