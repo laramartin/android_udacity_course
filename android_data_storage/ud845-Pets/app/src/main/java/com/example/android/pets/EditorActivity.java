@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -100,7 +99,6 @@ public class EditorActivity extends AppCompatActivity {
                     }
                 }
             }
-
             // Because AdapterView is an abstract class, onNothingSelected must be defined
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -114,22 +112,19 @@ public class EditorActivity extends AppCompatActivity {
         String breed = mBreedEditText.getText().toString().trim();
         String weightString = mWeightEditText.getText().toString().trim();
         int weight = Integer.parseInt(weightString);
-        int gender = mGender;
 
         SQLiteDatabase db = petDbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(PetContract.PetEntry.COLUMN_PET_NAME, name);
         values.put(PetContract.PetEntry.COLUMN_PET_BREED, breed);
         values.put(PetContract.PetEntry.COLUMN_PET_WEIGHT, weight);
-        values.put(PetContract.PetEntry.COLUMN_PET_GENDER, gender);
+        values.put(PetContract.PetEntry.COLUMN_PET_GENDER, mGender);
         try {
             long newRowId = db.insert(PetContract.PetEntry.TABLE_NAME, null, values);
-            Toast.makeText(EditorActivity.this, "Pet saved with id:" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditorActivity.this, "Pet saved with id: " + newRowId, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(EditorActivity.this, "error saving pet:", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditorActivity.this, "error saving pet", Toast.LENGTH_SHORT).show();
         }
-
-        Log.v("EditorActivity", "Content values: " + values.toString());
     }
 
     @Override
