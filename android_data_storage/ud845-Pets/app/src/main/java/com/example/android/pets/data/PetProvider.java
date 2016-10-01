@@ -153,11 +153,32 @@ public class PetProvider extends ContentProvider {
      * Return the number of rows that were successfully updated.
      */
     private int updatePet(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        if (values.containsKey(PetContract.PetEntry.COLUMN_PET_NAME)) {
+            String name = values.getAsString(PetContract.PetEntry.COLUMN_PET_NAME);
+            if (name == null) {
+                throw new IllegalArgumentException("Pet requires a name");
+            }
+        }
+        if (values.containsKey(PetContract.PetEntry.COLUMN_PET_GENDER)) {
+            Integer gender = values.getAsInteger(PetContract.PetEntry.COLUMN_PET_GENDER);
+            if (gender == null || !PetContract.PetEntry.isValidGender(gender)) {
+                throw new IllegalArgumentException("Pet requires valid gender");
+            }
+        }
+        if (values.containsKey(PetContract.PetEntry.COLUMN_PET_WEIGHT)) {
+            // Check that the weight is greater than or equal to 0 kg
+            Integer weight = values.getAsInteger(PetContract.PetEntry.COLUMN_PET_WEIGHT);
+            if (weight != null && weight < 0) {
+                throw new IllegalArgumentException("Pet requires valid weight");
+            }
+        }
+        if (values.size() == 0) {
+            return 0;
+        }
 
-        // TODO: Update the selected pets in the pets database table with the given ContentValues
-
-        // TODO: Return the number of rows that were affected
-        return 0;
+        SQLiteDatabase db = petDbHelper.getWritableDatabase();
+        int id = db.update(PetContract.PetEntry.TABLE_NAME, values, selection, selectionArgs);
+        return id;
     }
 
     /**
