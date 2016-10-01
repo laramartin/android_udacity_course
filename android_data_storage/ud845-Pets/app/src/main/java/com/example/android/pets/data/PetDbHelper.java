@@ -23,7 +23,7 @@ public class PetDbHelper extends SQLiteOpenHelper {
         String CREATE_TABLE_PETS = "CREATE TABLE " + PetContract.PetEntry.TABLE_NAME + "(" +
                 PetContract.PetEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 PetContract.PetEntry.COLUMN_PET_NAME + " TEXT NOT NULL," +
-                PetContract.PetEntry.COLUMN_PET_BREED + " TEXT NOT NULL," +
+                PetContract.PetEntry.COLUMN_PET_BREED + " TEXT," +
                 PetContract.PetEntry.COLUMN_PET_GENDER + " INTEGER NOT NULL DEFAULT 0," +
                 PetContract.PetEntry.COLUMN_PET_WEIGHT + " INTEGER NOT NULL" + ")";
         Log.v("PetDbHelper", "create table: " + CREATE_TABLE_PETS);
