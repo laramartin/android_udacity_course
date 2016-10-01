@@ -16,7 +16,7 @@
 package com.example.android.pets;
 
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +31,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.android.pets.data.PetContract;
-import com.example.android.pets.data.PetDbHelper;
 
 /**
  * Allows user to create a new pet or edit an existing one.
@@ -55,7 +54,6 @@ public class EditorActivity extends AppCompatActivity {
      * 0 for unknown gender, 1 for male, 2 for female.
      */
     private int mGender;
-    private PetDbHelper petDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +66,6 @@ public class EditorActivity extends AppCompatActivity {
         mWeightEditText = (EditText) findViewById(R.id.edit_pet_weight);
         mGenderSpinner = (Spinner) findViewById(R.id.spinner_gender);
 
-        petDbHelper = new PetDbHelper(this);
         setupSpinner();
     }
 
@@ -116,17 +113,20 @@ public class EditorActivity extends AppCompatActivity {
         String weightString = mWeightEditText.getText().toString().trim();
         int weight = Integer.parseInt(weightString);
 
-        SQLiteDatabase db = petDbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(PetContract.PetEntry.COLUMN_PET_NAME, name);
         values.put(PetContract.PetEntry.COLUMN_PET_BREED, breed);
         values.put(PetContract.PetEntry.COLUMN_PET_WEIGHT, weight);
         values.put(PetContract.PetEntry.COLUMN_PET_GENDER, mGender);
-        try {
-            long newRowId = db.insert(PetContract.PetEntry.TABLE_NAME, null, values);
-            Toast.makeText(EditorActivity.this, "Pet saved with id: " + newRowId, Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(EditorActivity.this, "error saving pet", Toast.LENGTH_SHORT).show();
+        Uri newUri = getContentResolver().insert(PetContract.PetEntry.CONTENT_URI, values);
+        if (newUri == null) {
+            // If the new content URI is null, then there was an error with insertion.
+            Toast.makeText(this, getString(R.string.editor_insert_pet_failed),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            // Otherwise, the insertion was successful and we can display a toast.
+            Toast.makeText(this, getString(R.string.editor_insert_pet_successful),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
