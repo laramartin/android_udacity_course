@@ -1,4 +1,4 @@
-package com.example.android.pets;
+package com.example.android.pets.data;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
