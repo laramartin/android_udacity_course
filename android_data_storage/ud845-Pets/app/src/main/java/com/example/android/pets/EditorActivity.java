@@ -61,7 +61,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * Gender of the pet. The possible values are:
      * 0 for unknown gender, 1 for male, 2 for female.
      */
-    private int gender;
+    private Integer gender;
 
     private Uri currentPetUri;
 
@@ -133,7 +133,19 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String name = nameEditText.getText().toString().trim();
         String breed = breedEditText.getText().toString().trim();
         String weightString = weightEditText.getText().toString().trim();
-        int weight = Integer.parseInt(weightString);
+        if (currentPetUri == null &&
+                TextUtils.isEmpty(name) && TextUtils.isEmpty(breed) &&
+                TextUtils.isEmpty(weightString) && gender == PetContract.PetEntry.GENDER_UNKNOWN) {
+            // Since no fields were modified, we can return early without creating a new pet.
+            // No need to create ContentValues and no need to do any ContentProvider operations.
+            return;
+        }
+
+        int weight = 0;
+        if (!TextUtils.isEmpty(weightString)) {
+            weight = Integer.parseInt(weightString);
+        }
+
         ContentValues values = new ContentValues();
         values.put(PetContract.PetEntry.COLUMN_PET_NAME, name);
         values.put(PetContract.PetEntry.COLUMN_PET_BREED, breed);
