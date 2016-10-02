@@ -26,7 +26,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,7 +61,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * Gender of the pet. The possible values are:
      * 0 for unknown gender, 1 for male, 2 for female.
      */
-    private int mGender;
+    private int gender;
 
     private Uri currentPetUri;
 
@@ -79,9 +78,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         } else {
             // Otherwise this is an existing pet
             setTitle(getString(R.string.editor_activity_title_edit_pet));
+            getSupportLoaderManager().initLoader(PET_LOADER, null, this);
         }
 
-        getSupportLoaderManager().initLoader(PET_LOADER, null, this);
 
         // Find all relevant views that we will need to read user input from
         nameEditText = (EditText) findViewById(R.id.edit_pet_name);
@@ -114,42 +113,60 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
                     if (selection.equals(getString(R.string.gender_male))) {
-                        mGender = PetContract.PetEntry.GENDER_MALE; // Male
+                        gender = PetContract.PetEntry.GENDER_MALE; // Male
                     } else if (selection.equals(getString(R.string.gender_female))) {
-                        mGender = PetContract.PetEntry.GENDER_FEMALE; // Female
+                        gender = PetContract.PetEntry.GENDER_FEMALE; // Female
                     } else {
-                        mGender = PetContract.PetEntry.GENDER_UNKNOWN; // Unknown
+                        gender = PetContract.PetEntry.GENDER_UNKNOWN; // Unknown
                     }
                 }
             }
             // Because AdapterView is an abstract class, onNothingSelected must be defined
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                mGender = 0; // Unknown
+                gender = 0; // Unknown
             }
         });
     }
 
-    private void insertPet() {
+    private void savePet() {
         String name = nameEditText.getText().toString().trim();
         String breed = breedEditText.getText().toString().trim();
         String weightString = weightEditText.getText().toString().trim();
         int weight = Integer.parseInt(weightString);
-
         ContentValues values = new ContentValues();
         values.put(PetContract.PetEntry.COLUMN_PET_NAME, name);
         values.put(PetContract.PetEntry.COLUMN_PET_BREED, breed);
         values.put(PetContract.PetEntry.COLUMN_PET_WEIGHT, weight);
-        values.put(PetContract.PetEntry.COLUMN_PET_GENDER, mGender);
-        Uri newUri = getContentResolver().insert(PetContract.PetEntry.CONTENT_URI, values);
-        if (newUri == null) {
-            // If the new content URI is null, then there was an error with insertion.
-            Toast.makeText(this, getString(R.string.editor_insert_pet_failed),
-                    Toast.LENGTH_SHORT).show();
+        values.put(PetContract.PetEntry.COLUMN_PET_GENDER, gender);
+
+        if (currentPetUri == null) {
+            Uri newUri = getContentResolver().insert(PetContract.PetEntry.CONTENT_URI, values);
+            if (newUri == null) {
+                // If the new content URI is null, then there was an error with insertion.
+                Toast.makeText(this, getString(R.string.editor_insert_pet_failed),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the insertion was successful and we can display a toast.
+                Toast.makeText(this, getString(R.string.editor_insert_pet_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
         } else {
-            // Otherwise, the insertion was successful and we can display a toast.
-            Toast.makeText(this, getString(R.string.editor_insert_pet_successful),
-                    Toast.LENGTH_SHORT).show();
+            int rowsAffected = getContentResolver().update(
+                    currentPetUri,
+                    values,
+                    null,
+                    null
+            );
+            if (rowsAffected == 0) {
+                // If the new content URI is null, then there was an error with insertion.
+                Toast.makeText(this, getString(R.string.editor_insert_pet_failed),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the insertion was successful and we can display a toast.
+                Toast.makeText(this, getString(R.string.editor_insert_pet_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -167,7 +184,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
-                insertPet();
+                savePet();
                 finish();
                 return true;
             // Respond to a click on the "Delete" menu option
@@ -186,8 +203,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
 
-        Log.v(LOG_TAG, currentPetUri.toString());
-
         String[] projection = {
                 PetContract.PetEntry._ID,
                 PetContract.PetEntry.COLUMN_PET_NAME,
@@ -196,19 +211,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 PetContract.PetEntry.COLUMN_PET_WEIGHT
         };
 
-        switch (id) {
-            case PET_LOADER:
-                return new CursorLoader(
+        return new CursorLoader(
                         this,
                         currentPetUri,
                         projection,
                         null,
                         null,
                         null
-                );
-            default:
-                return null;
-        }
+        );
+
     }
 
     @Override
@@ -230,6 +241,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public void onLoaderReset(Loader loader) {
+        //TODO clear input fields
 
     }
 }
