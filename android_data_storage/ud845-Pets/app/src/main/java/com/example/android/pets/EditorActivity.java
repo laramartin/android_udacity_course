@@ -65,7 +65,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * 0 for unknown gender, 1 for male, 2 for female.
      */
     private Integer gender;
-
     private Uri currentPetUri;
     private boolean mPetHasChanged = false;
 
@@ -85,7 +84,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             setTitle(getString(R.string.editor_activity_title_edit_pet));
             getSupportLoaderManager().initLoader(PET_LOADER, null, this);
         }
-
 
         // Find all relevant views that we will need to read user input from
         nameEditText = (EditText) findViewById(R.id.edit_pet_name);
@@ -252,7 +250,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return true;
     }
 
-
     /**
      * This method is called after invalidateOptionsMenu(), so that the
      * menu can be updated (some menu items can be hidden or made visible).
@@ -320,7 +317,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 PetContract.PetEntry.COLUMN_PET_GENDER,
                 PetContract.PetEntry.COLUMN_PET_WEIGHT
         };
-
         return new CursorLoader(
                         this,
                         currentPetUri,
@@ -329,7 +325,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         null,
                         null
         );
-
     }
 
     @Override
@@ -349,7 +344,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             genderSpinner.setSelection(gender);
         }
     }
-
 
     @Override
     public void onLoaderReset(Loader loader) {
@@ -379,7 +373,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 }
             }
         });
-
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
