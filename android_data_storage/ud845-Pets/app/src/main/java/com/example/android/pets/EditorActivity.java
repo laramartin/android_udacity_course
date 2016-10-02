@@ -353,8 +353,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public void onLoaderReset(Loader loader) {
-        //TODO clear input fields
-
+        nameEditText.setText("");
+        breedEditText.setText("");
+        weightEditText.setText("");
+        genderSpinner.setSelection(0);
     }
 
     private void showDeleteConfirmationDialog() {
@@ -387,7 +389,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * Perform the deletion of the pet in the database.
      */
     private void deletePet() {
-        // TODO: Implement this method
         if (currentPetUri != null) {
             int rowsAffected = getContentResolver().delete(
                     currentPetUri,
