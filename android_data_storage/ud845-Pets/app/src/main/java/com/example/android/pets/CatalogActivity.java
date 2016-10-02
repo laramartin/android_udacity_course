@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.pets.data.PetContract;
@@ -24,6 +25,7 @@ import com.example.android.pets.data.PetContract;
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int PET_LOADER = 0;
+    public static final String LOG_TAG = CatalogActivity.class.getSimpleName();
     PetCursorAdapter petCursorAdapter;
 
     @Override
@@ -46,6 +48,15 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         petCursorAdapter = new PetCursorAdapter(this, null);
         listView.setAdapter(petCursorAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long itemId) {
+                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                Uri uri = Uri.withAppendedPath(PetContract.PetEntry.CONTENT_URI, String.valueOf(itemId));
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        });
         getSupportLoaderManager().initLoader(PET_LOADER, null, this);
     }
 
